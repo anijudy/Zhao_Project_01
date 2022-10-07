@@ -18,6 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(knitr)
 ```
 
+# Project Setup
 In this study, we are interested in the lead-IQ dataset, which is described in detail in the `Background/DataInfo.md` document.
 
 Let's read in the data first, and take a look at the variables in the dataset.
@@ -29,8 +30,8 @@ lead_IQ <- read.csv("../DataRaw/lead-iq-01.csv", stringsAsFactors = T)
 # relative path is used here.
 
 # Print head and tail of the dataset
-kable(head(lead_IQ))
-kable(tail(lead_IQ))
+kable(head(lead_IQ), row.names = T)
+kable(tail(lead_IQ), row.names = T)
 
 # Check dimensions
 dim(lead_IQ)
@@ -39,11 +40,20 @@ dim(lead_IQ)
 summary(lead_IQ)
 ```
 
+# Boxplot
 
 It will be great to show the IQ levels by location status in a box plot.
 
 ```{r boxplot}
 boxplot(IQ ~ Smelter, data = lead_IQ)
 ```
-As we can see from the figure above, there is an outlier in the Far group. The mean of the IQ is currently `r mean(lead_IQ$IQ)`.
+
+As we can see from the figure above, there is an outlier in the Far group. 
+
+# Statistics Summary
+
+- The mean of the IQ is currently `r round(mean(lead_IQ$IQ), digits = 2)`.
+- The standard deviation of the IQ is `r round(sd(lead_IQ$IQ), digits = 2)`.
+- In Group Near, the mean of the IQ is `r round(mean(lead_IQ$IQ[lead_IQ$Smelter == "Near"]), digits = 2)`;
+- In Group Far, the mean of the IQ is `r round(mean(lead_IQ$IQ[lead_IQ$Smelter == "Far"]), digits = 2)`.
 
