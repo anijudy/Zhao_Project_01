@@ -51,7 +51,7 @@ lead_IQ$IQ[which(lead_IQ$IQ == 999)] <- 99
 summary(lead_IQ)
 
 # Save the processed data in csv format in the DataProcessed folder
-write.csv(lead_IQ, "../DataProcessed/lead-iq-corrected.csv")
+write.csv(lead_IQ, "../DataProcessed/lead-iq-corrected.csv", row.names = F)
 ```
 
 
