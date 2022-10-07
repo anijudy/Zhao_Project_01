@@ -36,9 +36,24 @@ kable(tail(lead_IQ), row.names = T)
 # Check dimensions
 dim(lead_IQ)
 
-# Check variables
+# Check dataset summary
 summary(lead_IQ)
 ```
+
+# Data Correction
+After a brief conversation with the primary investigator, it was identified that one individual who had an IQ value of “999” was in fact supposed to have a value of “99”. We need to correct that and save the processed data in the `DataProcessed` folder.
+
+```{r data-correction}
+# Change "999" to "99"
+lead_IQ$IQ[which(lead_IQ$IQ == 999)] <- 99
+
+# Check the summary of the current dataset
+summary(lead_IQ)
+
+# Save the processed data in csv format in the DataProcessed folder
+write.csv(lead_IQ, "../DataProcessed/lead-iq-corrected.csv")
+```
+
 
 # Boxplot
 
@@ -48,12 +63,16 @@ It will be great to show the IQ levels by location status in a box plot.
 boxplot(IQ ~ Smelter, data = lead_IQ)
 ```
 
-As we can see from the figure above, there is an outlier in the Far group. 
+As we can see from the figure above, the IQ levels in Group Far are generally higher than those in Group Near, but the IQ levels in Group Far have a wider spread than those in Group Near.
 
 # Statistics Summary
 
 - The mean of the IQ is currently `r round(mean(lead_IQ$IQ), digits = 2)`.
 - The standard deviation of the IQ is `r round(sd(lead_IQ$IQ), digits = 2)`.
-- In Group Near, the mean of the IQ is `r round(mean(lead_IQ$IQ[lead_IQ$Smelter == "Near"]), digits = 2)`;
-- In Group Far, the mean of the IQ is `r round(mean(lead_IQ$IQ[lead_IQ$Smelter == "Far"]), digits = 2)`.
+- In Group Near:
+    - the mean of the IQ is `r round(mean(lead_IQ$IQ[lead_IQ$Smelter == "Near"]), digits = 2)`;
+    - the standard deviation of the IQ is `r round(sd(lead_IQ$IQ[lead_IQ$Smelter == "Near"]), digits = 2)`.
+- In Group Far:
+    - the mean of the IQ is `r round(mean(lead_IQ$IQ[lead_IQ$Smelter == "Far"]), digits = 2)`;
+    - the standard deviation of the IQ is `r round(sd(lead_IQ$IQ[lead_IQ$Smelter == "Far"]), digits = 2)`.
 
