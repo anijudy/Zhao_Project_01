@@ -1,0 +1,48 @@
+---
+title: "Lead-IQ Data Analysis Report"
+author: "Yifan Zhao"
+date: "`r Sys.Date()`"
+output: 
+  pdf_document: default
+  
+knit: (function(inputFile, encoding) {
+      rmarkdown::render(inputFile,
+                        encoding=encoding,
+                        output_dir="./Reports")})
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Load libraries
+library(knitr)
+```
+
+In this study, we are interested in the lead-IQ dataset, which is described in detail in the `Background/DataInfo.md` document.
+
+Let's read in the data first, and take a look at the variables in the dataset.
+
+```{r data-loading}
+# Read in lead-iq-01.csv
+lead_IQ <- read.csv("../DataRaw/lead-iq-01.csv", stringsAsFactors = T)
+# Note: Since the report will be generated in the ./Reports folder,
+# relative path is used here.
+
+# Print head and tail of the dataset
+kable(head(lead_IQ))
+kable(tail(lead_IQ))
+
+# Check dimensions
+dim(lead_IQ)
+
+# Check variables
+summary(lead_IQ)
+```
+
+
+It will be great to show the IQ levels by location status in a box plot.
+
+```{r boxplot}
+boxplot(IQ ~ Smelter, data = lead_IQ)
+```
+As we can see from the figure above, there is an outlier in the Far group. 
