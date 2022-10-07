@@ -45,4 +45,5 @@ It will be great to show the IQ levels by location status in a box plot.
 ```{r boxplot}
 boxplot(IQ ~ Smelter, data = lead_IQ)
 ```
-As we can see from the figure above, there is an outlier in the Far group. 
+As we can see from the figure above, there is an outlier in the Far group. The mean of the IQ is currently `r mean(lead_IQ$IQ)`.
+
